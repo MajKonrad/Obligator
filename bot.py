@@ -35,6 +35,8 @@ async def deadlines(ctx):
 async def help(ctx):
     message = "📚 Obligator commands:\n\n"
     for command in bot.commands:
+        if command.name == "help":
+            continue
         message += f"!{command.name} - {command.help}\n"
     await ctx.author.send(message)
 
