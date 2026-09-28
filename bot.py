@@ -21,11 +21,11 @@ bot = commands.Bot(
 async def on_ready():
     print(f"{bot.user} er online!")
 
-@bot.command()
+@bot.command(help="Sjekker om boten er online.")
 async def ping(ctx):
     await ctx.send("Pong!")
 
-@bot.command()
+@bot.command(help="Viser alle kommende Canvas-deadlines.")
 async def deadlines(ctx):
     deadlines = get_future_assignment_deadlines()
     message = format_deadlines(deadlines)
@@ -33,6 +33,9 @@ async def deadlines(ctx):
 
 @bot.command()
 async def help(ctx):
+    message = "📚 Obligator commands:\n\n"
+    for command in bot.commands:
+        message += f"!{command.name} - {command.help}\n"
     await ctx.author.send("Hei")
 
 bot.run(DISCORD_TOKEN)
