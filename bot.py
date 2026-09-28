@@ -14,6 +14,7 @@ intents.message_content = True
 bot = commands.Bot(
     command_prefix="!",
     intents=intents
+    help_command=None
 )
 
 @bot.event
@@ -29,5 +30,9 @@ async def deadlines(ctx):
     deadlines = get_future_assignment_deadlines()
     message = format_deadlines(deadlines)
     await ctx.send(message)
+
+@bot.command()
+async def help(ctx):
+    await ctx.author.send("Hei")
 
 bot.run(DISCORD_TOKEN)
