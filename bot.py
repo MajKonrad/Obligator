@@ -36,6 +36,6 @@ async def help(ctx):
     message = "📚 Obligator commands:\n\n"
     for command in bot.commands:
         message += f"!{command.name} - {command.help}\n"
-    await ctx.author.send("Hei")
+    await ctx.author.send(message)
 
 bot.run(DISCORD_TOKEN)
