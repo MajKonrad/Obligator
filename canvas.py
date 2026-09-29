@@ -25,6 +25,27 @@ course_names = {
     34619: "ADSE2100 - MMI"
 }
 
+exams = [
+    {
+        "course": "DATS2300 - AlgDat",
+        "type": "Eksamen",
+        "date": datetime(2026, 11, 17, 9, 0, tzinfo=ZoneInfo("Europe/Oslo")),
+        "duration": "3 timer"
+    },
+    {
+        "course": "DAFE2200 - SysUt",
+        "type": "Eksamen",
+        "date": datetime(2026, 11, 25, 9, 0, tzinfo=ZoneInfo("Europe/Oslo")),
+        "duration": "3 timer"
+    },
+    {
+        "course": "ADSE2100 - MMI",
+        "type": "Mappelevering",
+        "date": datetime(2026, 11, 25, 11, 59, tzinfo=ZoneInfo("Europe/Oslo")),
+        "duration": None
+    }
+]
+
 
 def get_deadline(assignment):
     return assignment["deadline"]
