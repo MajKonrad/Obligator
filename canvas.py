@@ -46,6 +46,8 @@ exams = [
     }
 ]
 
+def get_exams():
+    return exams
 
 def get_deadline(assignment):
     return assignment["deadline"]
