@@ -3,6 +3,7 @@ from discord.ext import commands
 import os
 from dotenv import load_dotenv
 from canvas import get_future_assignment_deadlines, format_deadlines, get_exams
+from resources import add_resource
 
 load_dotenv()
 
@@ -70,7 +71,8 @@ async def help(ctx):
         "ping": "🏓",
         "deadlines": "📅",
         "nextdeadline": "⏰",
-        "exams": "📝"
+        "exams": "📝",
+        "add": "➕"
     }
 
     for command in bot.commands:
@@ -84,5 +86,17 @@ async def help(ctx):
             f"{command.help}\n\n"
         )
     await ctx.author.send(message)
+
+
+@bot.command(
+    help='Legger til en studieressurs.\nEksempel: !add DATS2300 "Binary Trees" "Bra forklaring på BST" https://youtube.com/...'
+)
+async def add(ctx, course, title, description, url):
+    added_by = str(ctx.author)
+    success = add_resource(course, title, description, url, added_by)
+    if success:
+        await ctx.send("✅ Ressursen ble lagt til!")
+    else:
+        await ctx.send("⚠️ Denne ressursen finnes allerede.")
 
 bot.run(DISCORD_TOKEN)
