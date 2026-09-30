@@ -114,22 +114,20 @@ def get_future_assignment_deadlines():
 def format_deadlines(deadlines):
     message = ""
 
-    for assignment in deadlines:
+    for number, assignment in enumerate(deadlines, start=1):
         if is_completed(assignment["assignment_id"]):
             status = "✅"
         else:
             status = "⬜"
 
-    for number, assignment in enumerate(deadlines, start=1):
         days_left = assignment["time_left"].days
-
         local_deadline = assignment["deadline"].astimezone(
             ZoneInfo("Europe/Oslo")
         )
 
         formatted_deadline = local_deadline.strftime("%d.%m.%Y %H:%M")
         message += f"{status} {number}.\n{assignment['course_name']}\n{assignment['name']}\nFrist: {formatted_deadline}\n{days_left} dager igjen\n\n"
-    
+
     return message
 
 
