@@ -3,6 +3,7 @@ import os
 from datetime import datetime, timezone
 from dotenv import load_dotenv
 from zoneinfo import ZoneInfo
+from progress import is_completed
 
 
 load_dotenv()
@@ -91,6 +92,7 @@ def get_future_assignment_deadlines():
                             time_left = deadline - now
 
                             all_assignments.append({
+                                "assignment_id": assignment.get("id"),
                                 "name": assignment.get("name"),
                                 "deadline": deadline,
                                 "time_left": time_left,
@@ -113,6 +115,12 @@ def format_deadlines(deadlines):
     message = ""
 
     for assignment in deadlines:
+        if is_completed(assignment["assignment_id"]):
+            status = "✅"
+        else:
+            status = "⬜"
+
+    for number, assignment in enumerate(deadlines, start=1):
         days_left = assignment["time_left"].days
 
         local_deadline = assignment["deadline"].astimezone(
@@ -120,7 +128,7 @@ def format_deadlines(deadlines):
         )
 
         formatted_deadline = local_deadline.strftime("%d.%m.%Y %H:%M")
-        message += f"{assignment['course_name']}\n{assignment['name']}\nFrist: {formatted_deadline}\n{days_left} dager igjen\n\n"
+        message += f"{status} {number}.\n{assignment['course_name']}\n{assignment['name']}\nFrist: {formatted_deadline}\n{days_left} dager igjen\n\n"
     
     return message
 
