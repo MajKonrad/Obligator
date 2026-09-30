@@ -92,7 +92,10 @@ async def help(ctx):
         "ping": "🏓",
         "deadlines": "📅",
         "nextdeadline": "⏰",
-        "exams": "📝"
+        "exams": "📝",
+        "add": "➕",
+        "done": "✅",
+        "undone": "⬜"
     }
 
     for command in bot.commands:
