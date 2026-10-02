@@ -3,8 +3,6 @@ from discord.ext import commands
 import os
 from dotenv import load_dotenv
 from canvas import get_future_assignment_deadlines, format_deadlines, get_exams
-from progress import mark_completed, mark_undone
-
 
 load_dotenv()
 
@@ -26,26 +24,6 @@ async def on_ready():
 @bot.command(help="Sjekker om boten er online.")
 async def ping(ctx):
     await ctx.send("Pong!")
-
-@bot.command(help="Markerer en deadline som ferdig. Eksempel: !done 2")
-async def done(ctx, number: int):
-    deadlines = get_future_assignment_deadlines()
-    if number < 1 or number > len(deadlines):
-        await ctx.send("❌ Ugyldig nummer. Sjekk `!deadlines` for tilgjengelige deadlines.")
-        return
-    assignment = deadlines[number - 1]
-    mark_completed(assignment["assignment_id"])
-    await ctx.send(f"✅ {assignment['name']} er markert som ferdig!")
-
-@bot.command(help="Fjerner ferdig-markering fra en deadline. Eksempel: !undone 2")
-async def undone(ctx, number: int):
-    deadlines = get_future_assignment_deadlines()
-    if number < 1 or number > len(deadlines):
-        await ctx.send("❌ Ugyldig nummer. Sjekk `!deadlines` for tilgjengelige deadlines.")
-        return
-    assignment = deadlines[number - 1]
-    mark_undone(assignment["assignment_id"])
-    await ctx.send(f"⬜ {assignment['name']} er markert som ikke ferdig!")
 
 @bot.command(help="Viser nærmeste kommende oblig-deadline")
 async def nextdeadline(ctx):
@@ -92,10 +70,7 @@ async def help(ctx):
         "ping": "🏓",
         "deadlines": "📅",
         "nextdeadline": "⏰",
-        "exams": "📝",
-        "add": "➕",
-        "done": "✅",
-        "undone": "⬜"
+        "exams": "📝"
     }
 
     for command in bot.commands:
