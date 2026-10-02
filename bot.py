@@ -3,6 +3,7 @@ from discord.ext import commands
 import os
 from dotenv import load_dotenv
 from canvas import get_future_assignment_deadlines, format_deadlines, get_exams
+from weather import get_todays_weather, get_tomorrows_weather
 
 load_dotenv()
 
@@ -24,6 +25,16 @@ async def on_ready():
 @bot.command(help="Sjekker om boten er online.")
 async def ping(ctx):
     await ctx.send("Pong!")
+
+@bot.command(help="Viser været ved OsloMet i dag.")
+async def weathertoday(ctx):
+    weather = get_todays_weather()
+    await ctx.send(weather)
+
+@bot.command(help="Viser været ved OsloMet i morgen")
+async def weathertomorrow(ctx):
+    weather = get_tomorrows_weather()
+    await ctx.send(weather)
 
 @bot.command(help="Viser nærmeste kommende oblig-deadline")
 async def nextdeadline(ctx):
@@ -70,7 +81,9 @@ async def help(ctx):
         "ping": "🏓",
         "deadlines": "📅",
         "nextdeadline": "⏰",
-        "exams": "📝"
+        "exams": "📝",
+        "weathertoday": "🌤️",
+        "weathertomorrow": "🌦️"
     }
 
     for command in bot.commands:
