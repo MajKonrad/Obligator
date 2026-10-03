@@ -82,8 +82,8 @@ async def help(ctx):
         "deadlines": "📅",
         "nextdeadline": "⏰",
         "exams": "📝",
-        "weathertoday": "🌤️",
-        "weathertomorrow": "🌦️"
+        "wt": "🌤️",
+        "wtm": "🌦️"
     }
 
     for command in bot.commands:
