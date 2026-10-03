@@ -27,12 +27,12 @@ async def ping(ctx):
     await ctx.send("Pong!")
 
 @bot.command(help="Viser været ved OsloMet i dag.")
-async def weathertoday(ctx):
+async def wt(ctx):
     weather = get_todays_weather()
     await ctx.send(weather)
 
 @bot.command(help="Viser været ved OsloMet i morgen")
-async def weathertomorrow(ctx):
+async def wtm(ctx):
     weather = get_tomorrows_weather()
     await ctx.send(weather)
 
